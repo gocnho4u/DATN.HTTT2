@@ -1,0 +1,214 @@
+﻿@using DATN.HTTT2.Areas.Admin.Models
+
+@model DATN.HTTT2.Areas.Admin.Models.PNHCt
+
+@{
+    ViewBag.Title = "Sửa phiếu nhập hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    HTTTEntities db = new HTTTEntities();
+    List<string> tenhh = (from n in db.HANG_HOA
+                          select n.TenHangHoa).ToList();
+
+
+    var ds = from n in db.HANG_HOA
+             select new { n.TenHangHoa, n.DonViTinh, n.DonGia };
+
+}
+
+<head>
+    <style>
+        span.error {
+            font-size: 90%;
+        }
+
+        .no-bottom-border td {
+            border: none;
+        }
+
+        .right-align {
+            text-align: right;
+        }
+    </style>
+</head>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Chỉnh sửa phiếu nhập hàng @Model.mapn</h4>
+    </div>
+
+    <div class="card-body">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Tên nhà cung cấp</span>
+            </div>
+            <input id="daily" type="text" class="form-control" value="@Model.nhacc" disabled="disabled">
+
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Mã phiếu nhập hàng</span>
+            </div>
+            <input type="text" class="form-control" id="madh" value="@Model.mapn" disabled="disabled">
+
+        </div>
+
+        <br />
+
+        <h5 class="m-0 font-weight-bold text-primary">Thêm chi tiết phiếu nhập hàng</h5>
+        <table class="table table-responsive" id="tblItems" cellpadding="0">
+            <tr>
+                <th>
+                    Tên hàng hóa
+                </th>
+                <th>
+                    Đơn vị tính
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Đơn giá
+                </th>
+                <th>
+                    %CK
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+            </tr>
+            <tr id="MainRow">
+                <td>
+                    <input type="text" id="hanghoa" class="hanghoa form-control" onchange="capnhapgia()" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="dvtinh" class="dvtinh form-control" disabled="disabled" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="number" id="soluong" class="soluong form-control" onchange="capnhattongtien()" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="dongia" class="dongia form-control" disabled="disabled" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="number" max="100" id="chietkhau" class="chietkhau form-control" onchange="capnhattongtien()" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="thanhtien" class="thanhtien form-control" disabled="disabled" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="ghichu" class="ghichu form-control" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" id="add">Thêm</button>
+                </td>
+            </tr>
+        </table>
+
+        <h5 class="m-0 font-weight-bold text-primary">Chi tiết đơn đặt hàng</h5>
+        <br />
+
+        <table class="table table-bordered" id="bangct">
+            <thead>
+                <tr>
+                    <th>Tên hàng hóa</th>
+                    <th>ĐVT</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Chiết khấu</th>
+                    <th>Thành tiền</th>
+                    <th>Ghi chú</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.danhsachct)
+                {
+                    <tr>
+                        <td class="hanghoa">@item.hanghoa</td>
+                        <td class="dvtinh">@item.dvt</td>
+                        <td class="soluong">@item.soluong </td>
+                        <td class="dongia">@item.dongia</td>
+                        <td class="chietkhau">@item.chietkhau</td>
+                        <td class="thanhtien right-align">@item.thanhtien</td>
+                        <td class="ghichu"> @item.ghichu</td>
+                        <td class="remove btn btn-danger"> Xóa</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="no-bottom-border">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align:right;"><span style="font-weight:bold;">Tổng tiền: </span></td>
+                    <td style="text-align:right;"><span id="tongtien">@ViewBag.TongTien</span></td>
+                    <td>đồng</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div style="float:right">
+            <span class="text-danger" id="orderMessage"></span>
+            <input type="button" class="btn btn-primary" id="submit" value="Lưu đơn đặt hàng" />
+            @Html.ActionLink("Hủy", "Details", new { id = Model.mapn }, new { @class = "btn btn-danger" })
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/autocomplete/jquery-1.12.4.js"></script>
+<script src="~/Scripts/autocomplete/jquery-ui.js"></script>
+<script src="~/Scripts/ChinhSuaNhap.js"></script>
+
+<script>
+    $(function () {
+        var availableTags = @Html.Raw(Json.Encode(tenhh));
+        $("#hanghoa").autocomplete({
+            source: availableTags
+        });
+    });
+
+    function capnhapgia() {
+        var ss = @Html.Raw(Json.Encode(ds));
+        var key = document.getElementById("hanghoa").value;
+        var kq = search(key, ss);
+        var kqdg = '';
+        var kqdvt = ''
+        if (!!kq) {
+            kqdg = kq.DonGia;
+            kqdvt = kq.DonViTinh;
+        }
+        document.getElementById("dongia").value = kqdg;
+        document.getElementById("dvtinh").value = kqdvt;
+        capnhattongtien();
+    }
+
+    function capnhattongtien() {
+        var soluong = document.getElementById('soluong').value;
+        var dongia = document.getElementById('dongia').value;
+        var chietkhau = document.getElementById('chietkhau').value;
+        var thanhtien = parseInt(soluong) * parseInt(dongia) *  parseFloat(parseInt(100 - parseInt(chietkhau)) / 100);
+        document.getElementById('thanhtien').value = thanhtien;
+    }
+
+    function search(nameKey, myArray) {
+        for (var i = 0; i < myArray.length; i++) {
+            if (myArray[i].TenHangHoa === nameKey) {
+                return myArray[i];
+            }
+        }
+    }
+
+</script>

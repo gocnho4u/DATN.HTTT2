@@ -1,0 +1,112 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.HANG_HOA>
+
+@{
+    ViewBag.Title = "Danh sách hàng hóa";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+</style>
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách hàng hóa</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaHH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenHangHoa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DonViTinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DonGia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DinhMucTK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LOAI_HANG_HOA.TenLoai)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaHH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenHangHoa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DonViTinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DonGia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DinhMucTK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LOAI_HANG_HOA.TenLoai)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.MaHH">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaHH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenHangHoa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DonViTinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DonGia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DinhMucTK)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LOAI_HANG_HOA.TenLoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NHA_CUNG_CAP.TenNCC)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chi tiết", "Edit", new { id = item.MaHH }, new { @class = "btn btn-info" }) |
+                            @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaHH }, new AjaxOptions
+                       {
+                           Confirm="Bạn có chắc muốn xóa hàng hóa này (Tồn kho hàng hóa cũng sẽ bị xóa)?",
+                           OnComplete="$('#row_"+item.MaHH+"').remove()",
+                           HttpMethod="Delete"
+                       }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>

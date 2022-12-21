@@ -1,0 +1,149 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.PHIEU_NHAP_HANG>
+
+@{
+    ViewBag.Title = "Danh sách phiếu nhập hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách phiếu nhập hàng</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPNH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayNhap)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NhanHang)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gui)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPNH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayNhap)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NhanHang)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gui)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaPNH">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaPNH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayNhap)
+                            </td>
+                            <td>
+                                <a href="#" class="doigiaohang" data-id="@item.MaPNH" data-tt="@item.Gui">@(item.NhanHang ? "Đã nhận hàng" : "Chưa nhận hàng")</a>
+                            </td>
+                            <td>
+                                @(item.Gui ? "Đã gửi" : "Chưa gửi")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NHA_CUNG_CAP.TenNCC)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NHAN_VIEN.HoTen)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaPNH }, new { @class = "btn btn-info" }) 
+                                @if (ViewBag.Quyen == true)
+                                {
+                                    @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaPNH }, new AjaxOptions
+                               {
+                                   Confirm="Bạn có chắc muốn xóa phiếu nhập hàng "+ item.MaPNH +" không?"+ "\n(Tồn kho hàng hóa cũng sẽ thay đổi)",
+                                   OnComplete="$('#row_"+item.MaPNH+"').remove()",
+                                   HttpMethod="Delete"
+                               }, new { @class = "btn btn-danger" })
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.doigiaohang').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    var tt = btn.data('tt');
+                    console.log(tt)
+                    if (tt == 'False') {
+                        alert('Không thể chuyển trạng thái phiếu nhập hàng chưa gửi!');
+                    }else {
+                        var kq = confirm('Bạn có chắc chắn muốn chuyển trạng thái phiếu nhập hàng ' + id + ' không?');
+                        if (kq == true) {
+                            $.ajax({
+                                url: "/Admin/PNHCt/ChangeStatus",
+                                data: { id: id },
+                                dataType: "json",
+                                type: "POST",
+                                success: function (response) {
+                                    console.log(response);
+                                    if (response.status == true) {
+                                        btn.text('Đã nhận hàng')
+                                    }
+                                    else {
+                                        btn.text('Chưa nhận hàng');
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }
+        user.init();
+    </script>
+}

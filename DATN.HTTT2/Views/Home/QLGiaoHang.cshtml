@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.DON_DAT_HANG>
+
+@{
+    ViewBag.Title = "Danh sách đơn đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDDH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayDat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GiaoHang)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDDH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayDat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GiaoHang)
+                        </th>
+                        <th class="none"></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaDDH">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaDDH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayDat)
+                            </td>
+                            <td>
+                               @if (item.GiaoHang == "Đã giao")
+                                    {
+                                        <p  style="color:green"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></p>
+                                    }
+                                    else if (item.GiaoHang == "Chưa giao")
+                                    {
+                                        <p style="color:red"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></p>
+                                    }
+                                    else
+                                    {
+                                        <p style="color:#ff9900"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></p>
+
+                                    }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDDH }, new { @class = "btn btn-info" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

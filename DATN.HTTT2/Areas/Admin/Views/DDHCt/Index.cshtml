@@ -1,0 +1,87 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.DON_DAT_HANG>
+
+    @{
+        ViewBag.Title = "Quản lý đơn đặt hàng";
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    }
+
+    <head>
+        <!-- Custom styles for this page -->
+        <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    </head>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MaDDH)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayDat)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DAI_LY.Ten)
+                            </th>
+                            <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MaDDH)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayDat)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DAI_LY.Ten)
+                            </th>
+                            <th class="none"></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.MaDDH">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaDDH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayDat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NHAN_VIEN.HoTen)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DAI_LY.Ten)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDDH }, new { @class = "btn btn-info" }) |
+                                    @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaDDH }, new AjaxOptions
+                                                      {
+                                                          Confirm="Bạn có chắc muốn xóa đơn đặt hàng "+ item.MaDDH +" không?\n(Tồn kho hàng hóa cũng sẽ thay đổi)",
+                                                          OnComplete="$('#row_"+item.MaDDH+"').remove()",
+                                                          HttpMethod="Delete"
+                                                      }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+

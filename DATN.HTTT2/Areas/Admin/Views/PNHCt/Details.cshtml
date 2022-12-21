@@ -1,0 +1,202 @@
+﻿@model DATN.HTTT2.Areas.Admin.Models.ViewModels.XemPNH
+@{
+    ViewBag.Title = "Chi tiết phiếu nhập";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary" style="float:left">Phiếu nhập hàng @Model.PHIEU_NHAP_HANG.MaPNH</h4> <span id="madh" hidden>@Model.PHIEU_NHAP_HANG.MaPNH</span>
+        <div style="float:right">
+            <span class="text-danger" id="orderMessage"></span>
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("In", "Print", new { id = Model.PHIEU_NHAP_HANG.MaPNH }, new { @class = "btn btn-info" })
+            <button id="submit2" class="btn btn-info">Gửi</button>
+            @if (Model.PHIEU_NHAP_HANG.NhanHang == false)
+            {
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.PHIEU_NHAP_HANG.MaPNH }, new { @class = "btn btn-success" })
+            }
+        </div>
+    </div>
+    <br />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tên nhà cung cấp</span>
+        </div>
+        <input id="daily" type="text" class="form-control" value="@Model.PHIEU_NHAP_HANG.NHA_CUNG_CAP.TenNCC" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Địa chỉ</span>
+        </div>
+        <input id="diachi" type="text" class="form-control" value="@Model.PHIEU_NHAP_HANG.NHA_CUNG_CAP.DiaChi" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tình trạng nhận hàng </span>
+        </div>
+        <input id="diachi" type="text" class="form-control" value="@(Model.PHIEU_NHAP_HANG.NhanHang ? "Đã nhận hàng" : "Chưa nhận hàng")" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tình trạng phiếu nhập hàng</span>
+        </div>
+        <input id="diachi" type="text" class="form-control" value="@(Model.PHIEU_NHAP_HANG.Gui ? "Đã gửi " : "Chưa gửi")" disabled="disabled">
+    </div>
+    <br />
+    <div class="card-header p-3">
+        <h5 class="m-0 font-weight-bold text-primary">Chi tiết phiếu nhập hàng</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên hàng hóa
+                        </th>
+                        <th>
+                            ĐVT
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            %CK
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên hàng hóa
+                        </th>
+                        <th>
+                            ĐVT
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            %CK
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.cHI_TIET_PNHs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.STT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.TenHangHoa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.DonViTinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoLuong)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.DonGia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChietKhau)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TongTien)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GhiChu)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="bangct2"  hidden>
+    <h3>Phiếu nhập hàng Công ty CNV @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year @DateTime.Now.TimeOfDay</h3>
+    <p><span style="font-weight:bold">Địa chỉ:</span> Phạm Hùng</p>
+    <table style="border: 1px solid black; border-collapse: collapse;">
+        <tr style="border: 1px solid black; padding: 10px;">
+
+            <th style="border: 1px solid black; padding: 10px;">
+                STT
+            </th>
+            <th style="border: 1px solid black; padding: 10px;">
+                Tên hàng hóa
+            </th>
+            <th style="border: 1px solid black; padding: 10px;">
+                Đơn vị tính
+            </th>
+            <th style="border: 1px solid black; padding: 10px;">
+                Số lượng
+            </th>
+            <th style="border: 1px solid black; padding: 10px;">
+                Ghi chú
+            </th>
+        </tr>
+        @foreach (var item in Model.cHI_TIET_PNHs)
+        {
+        <tr style="border: 1px solid black; padding: 10px;">
+            <td style="text-align:center;border: 1px solid black; padding: 10px;">
+                @Html.DisplayFor(modelItem => item.STT)
+            </td>
+            <td style="text-align:center;border: 1px solid black; padding: 10px;">
+                @Html.DisplayFor(modelItem => item.HANG_HOA.TenHangHoa)
+            </td>
+            <td style="text-align:center;border: 1px solid black; padding: 10px;">
+                @Html.DisplayFor(modelItem => item.HANG_HOA.DonViTinh)
+            </td>
+            <td style="text-align:center;border: 1px solid black; padding: 10px;">
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td style="text-align:center;border: 1px solid black; padding: 10px;">
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+<script src="~/Scripts/autocomplete/jquery-1.12.4.js"></script>
+<script src="~/Scripts/autocomplete/jquery-ui.js"></script>
+<script src="~/Scripts/PhieuNhapDN.js"></script>

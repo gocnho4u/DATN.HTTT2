@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.CHI_TIET_PNH>
+
+@{
+    ViewBag.Title = "Chi tiết phiếu nhập hàng tự động";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary" style="float:left">Phiếu nhập hàng tự động @ViewBag.TenNCC</h4>
+        <div style="float:right">
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Chỉnh sửa và lưu", "Create", new { id = ViewBag.TenNCC }, new { @class = "btn btn-info" })
+        </div>
+    </div>
+    <br />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tên nhà cung cấp</span>
+        </div>
+        <input id="daily" type="text" class="form-control" value="@ViewBag.TenNCC" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Địa chỉ</span>
+        </div>
+        <input type="text" class="form-control"  value="@ViewBag.DiaChi" disabled="disabled">
+    </div>
+    <br />
+    <h2 style="text-align:center">Chi tiết phiếu nhập hàng tự động @ViewBag.TenNCC</h2>
+    <hr />
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.STT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HANG_HOA.TenHangHoa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SoLuong)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TongTien)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GhiChu)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.STT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaHH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoLuong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TongTien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GhiChu)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

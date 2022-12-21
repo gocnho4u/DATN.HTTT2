@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.DON_DAT_HANG>
+
+@{
+    ViewBag.Title = "Danh sách đơn đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDDH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayDat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "LapDDH", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDDH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayDat)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DAI_LY.Ten)
+                        </th>
+                        <th class="none"></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaDDH">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaDDH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayDat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DAI_LY.Ten)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDDH }, new { @class = "btn btn-info" }) 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

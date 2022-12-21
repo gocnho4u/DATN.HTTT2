@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.DAI_LY>
+
+@{
+    ViewBag.Title = "Danh sách đại lý";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách đại lý</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaChi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoDienThoai)
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaDL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ten)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaChi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoDienThoai)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.MaDL">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaDL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaChi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoDienThoai)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chi tiết", "Edit", new { id = item.MaDL }, new { @class = "btn btn-info" }) |
+                            @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaDL }, new AjaxOptions
+                       {
+                           Confirm="Bạn có chắc muốn xóa đại lý này (Công nợ của đại lý cũng sẽ bị xóa)?",
+                           OnComplete="$('#row_"+item.MaDL+"').remove()",
+                           HttpMethod="Delete"
+                       }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>

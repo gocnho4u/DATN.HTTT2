@@ -1,0 +1,139 @@
+﻿@model DATN.HTTT2.Areas.Admin.Models.ViewModels.XemDDH
+
+@{
+                /**/
+
+                ViewBag.Title = "Chi tiết đơn giao hàng";
+}
+
+<head>
+    @Styles.Render("~/Content/themes/base/css")
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="~/Du_Lieu/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .no-bottom-border td {
+            border: none;
+        }
+    </style>
+</head>
+
+
+<div class="card-header py-3">
+    <h4>Phiếu giao hàng @Model.DON_DAT_HANG.MaDDH</h4>
+</div>
+<br />
+
+<div class="input-group mb-3">
+    <span style="font-weight:bold">Tên khách hàng:</span> @Model.DON_DAT_HANG.DAI_LY.Ten
+</div>
+
+<div class="input-group mb-3">
+    <span style="font-weight:bold">Địa chỉ nhận hàng:</span> @Model.DON_DAT_HANG.DiaChi
+</div>
+
+<br />
+<div class="card-header p-3">
+    <h5>Chi tiết phiếu giao hàng</h5>
+</div>
+
+
+<table class="table table-bordered" id="dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Tên hàng hóa
+            </th>
+            <th>
+                ĐVT
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Đơn giá
+            </th>
+            <th>
+                %CK
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th>
+                Ghi chú
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.cHI_TIET_DDHs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HANG_HOA.TenHangHoa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HANG_HOA.DonViTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HANG_HOA.DonGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChietKhau)
+                </td>
+                <td style="text-align:right">
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GhiChu)
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr class="no-bottom-border">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align:right"><span style="font-weight:bold">Tổng tiền: </span></td>
+            <td style="text-align:right"><span id="tongtien">@ViewBag.TongTien  </span></td>
+            <td>đồng</td>
+        </tr>
+    </tfoot>
+</table>
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Người nhận</td>
+            <td style="text-align:center; font-weight:bold;">Người giao</td>
+            <td style="text-align:center; font-weight:bold;">Người lập</td>
+            <td style="text-align:center; font-weight:bold;">Người kiểm toa</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center">(Ký, ghi rõ họ tên)</td>
+            <td></td>
+            <td></td>
+            <td style="text-align:center">(Ký, ghi rõ họ tên)</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+

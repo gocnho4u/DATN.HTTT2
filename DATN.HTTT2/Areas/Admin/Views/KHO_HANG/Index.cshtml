@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.KHO_HANG>
+
+@{
+    ViewBag.Title = "Danh sách kho hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách kho hàng</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaChi)
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DiaChi)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.MaKH">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaKH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenKH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaChi)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Chi tiết", "Edit", new { id = item.MaKH }, new { @class = "btn btn-info" }) |
+                            @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaKH }, new AjaxOptions
+                       {
+                           Confirm="Bạn có chắc muốn xóa kho hàng này không (Các tồn kho hàng hóa ở kho này cũng sẽ bị xóa)?",
+                           OnComplete="$('#row_"+item.MaKH+"').remove()",
+                           HttpMethod="Delete"
+                       }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>

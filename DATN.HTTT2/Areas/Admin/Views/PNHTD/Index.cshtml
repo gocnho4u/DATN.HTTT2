@@ -1,0 +1,124 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.PHIEU_NHAP_HANG>
+
+@{
+    ViewBag.Title = "Danh sách phiếu nhập hàng tự động";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách phiếu nhập hàng tự động</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPNH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayNhap)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gui)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPNH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayNhap)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Gui)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHA_CUNG_CAP.TenNCC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaPNH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayNhap)
+                            </td>
+                            <td>
+                                @(item.Gui ? "Đã gửi" : "Chưa gửi")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaNCC)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NHAN_VIEN.HoTen)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaNCC }, new { @class = "btn btn-info" }) 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.doigiaohang').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    var kq = confirm('Bạn có chắc chắn muốn chuyển trạng thái phiếu nhập hàng ' + id + ' không?');
+                    if (kq == true) {
+                        $.ajax({
+                            url: "/Admin/PNHCt/ChangeStatus",
+                            data: { id: id },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (response) {
+                                console.log(response);
+                                if (response.status == true) {
+                                    btn.text('Đã nhận hàng')
+                                }
+                                else {
+                                    btn.text('Chưa nhận hàng');
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        user.init();
+    </script>
+}

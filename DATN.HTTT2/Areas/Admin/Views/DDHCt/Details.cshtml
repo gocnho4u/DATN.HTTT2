@@ -1,0 +1,146 @@
+﻿@model DATN.HTTT2.Areas.Admin.Models.ViewModels.XemDDH
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary" style="float:left">Đơn đặt hàng @Model.DON_DAT_HANG.MaDDH</h4>
+        <div style="float:right">
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("In", "Print", new { id = Model.DON_DAT_HANG.MaDDH }, new { @class = "btn btn-info" })
+            @if (Model.DON_DAT_HANG.GiaoHang == "")
+            {
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.DON_DAT_HANG.MaDDH }, new { @class = "btn btn-success" })
+            }
+        </div>
+    </div>
+    <br />
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tên khách hàng</span>
+        </div>
+        <input id="daily" type="text" class="form-control" value="@Model.DON_DAT_HANG.DAI_LY.Ten" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Địa chỉ nhận hàng</span>
+        </div>
+        <input id="diachi" type="text" class="form-control" value="@Model.DON_DAT_HANG.DiaChi" disabled="disabled">
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Tình trạng đơn hàng</span>
+        </div>
+        <input id="diachi" type="text" class="form-control" value="@Model.DON_DAT_HANG.GiaoHang" disabled="disabled">
+    </div>
+    <br />
+    <div class="card-header p-3">
+        <h5 class="m-0 font-weight-bold text-primary">Chi tiết đơn đặt hàng</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên hàng hóa
+                        </th>
+                        <th>
+                            ĐVT
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            %CK
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên hàng hóa
+                        </th>
+                        <th>
+                            ĐVT
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Đơn giá
+                        </th>
+                        <th>
+                            %CK
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.cHI_TIET_DDHs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.STT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.TenHangHoa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.DonViTinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoLuong)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.DonGia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChietKhau)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TongTien)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GhiChu)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

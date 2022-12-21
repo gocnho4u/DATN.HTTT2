@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a3fae3d28ac2473eab1a47748cd092b0" Name="Diagram1">
+        <EntityTypeShape EntityType="HTTTModel.KHO_HANG" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HTTTModel.LOAI_HANG_HOA" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HTTTModel.NHA_CUNG_CAP" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HTTTModel.NHAN_VIEN" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HTTTModel.Ton_kho" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="HTTTModel.FK_Ton_kho_KHO_HANG" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HTTTModel.CongNo" Width="1.5" PointX="6" PointY="16.125" />
+        <EntityTypeShape EntityType="HTTTModel.DAI_LY" Width="1.5" PointX="3.75" PointY="0.875" />
+        <AssociationConnector Association="HTTTModel.FK_CongNo_DAI_LY" />
+        <EntityTypeShape EntityType="HTTTModel.DON_DAT_HANG" Width="1.5" PointX="9" PointY="12.75" />
+        <AssociationConnector Association="HTTTModel.FK_DON_DAT_HANG_DAI_LY" />
+        <AssociationConnector Association="HTTTModel.FK_DON_DAT_HANG_NHAN_VIEN" />
+        <EntityTypeShape EntityType="HTTTModel.CHI_TIET_DDH" Width="1.5" PointX="11.25" PointY="10.375" />
+        <EntityTypeShape EntityType="HTTTModel.CHI_TIET_PNH" Width="1.5" PointX="8.25" PointY="8.625" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_DDH_DON_DAT_HANG" />
+        <EntityTypeShape EntityType="HTTTModel.PHIEU_CHUYEN_KHO" Width="1.5" PointX="5.25" PointY="5.625" />
+        <AssociationConnector Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG" />
+        <AssociationConnector Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG1" />
+        <AssociationConnector Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_NHAN_VIEN" />
+        <EntityTypeShape EntityType="HTTTModel.CHI_TIET_PCK" Width="1.5" PointX="7.5" PointY="5" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO" />
+        <EntityTypeShape EntityType="HTTTModel.PHIEU_NHAP_HANG" Width="1.5" PointX="3" PointY="12.25" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_PNH_PHIEU_NHAP_HANG" />
+        <AssociationConnector Association="HTTTModel.FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP" />
+        <AssociationConnector Association="HTTTModel.FK_PHIEU_NHAP_HANG_NHAN_VIEN" />
+        <EntityTypeShape EntityType="HTTTModel.HANG_HOA" Width="1.5" PointX="3" PointY="7.75" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_DDH_HANG_HOA" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_PCK_HANG_HOA" />
+        <AssociationConnector Association="HTTTModel.FK_CHI_TIET_PNH_HANG_HOA" />
+        <AssociationConnector Association="HTTTModel.FK_HANG_HOA_LOAI_HANG_HOA" />
+        <AssociationConnector Association="HTTTModel.FK_HANG_HOA_NHA_CUNG_CAP" />
+        <AssociationConnector Association="HTTTModel.FK_Ton_kho_HANG_HOA" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

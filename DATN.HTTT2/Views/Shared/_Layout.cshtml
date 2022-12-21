@@ -1,0 +1,139 @@
+﻿@{ 
+    var daily = Session["DaiLy"] as DATN.HTTT2.Areas.Admin.Models.DAI_LY;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Công ty TNHH CNV</title>
+    <link href="~/Du_Lieu/css/sb-admin-2.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/themes/base/css")
+    <style>
+        h2 {
+            font-size: 29px;
+            font-weight: lighter;
+            display: inline-block;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            margin-right: 42px;
+        }
+
+        button {
+            margin: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <div>
+            <h3>Công ty CNV</h3>
+            <small style="float:right">Kính chào, quý khách!</small>
+        </div>
+
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="@Url.Action("LapDDH","Home")">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Lập đơn đặt hàng</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="@Url.Action("XemDDH","Home")">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Xem lịch sử đặt hàng</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="@Url.Action("QLGiaoHang","Home")">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Quản lý giao hàng</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hướng dẫn</span>
+                </a>
+            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Xin chào, @daily.Ten !</span>
+                    <img class="img-profile rounded-circle" src="~/Du_Lieu/img/user.jpg">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="@Url.Action("DoiMK","Home")">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Đổi thông tin
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Công ty CNV</p>
+        </footer>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn chắc chắn muốn thoát?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Chọn đăng xuất để thoát khỏi tài khoản</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <a class="btn btn-primary" href="@Url.Action("DangXuat","Home")">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jqueryui")
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Du_Lieu/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Du_Lieu/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Du_Lieu/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <!-- Page level plugins -->
+    <script src="~/Du_Lieu/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Du_Lieu/js/demo/datatables-demo.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

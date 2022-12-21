@@ -1,0 +1,134 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.DON_DAT_HANG>
+
+    @{
+        ViewBag.Title = "Quản lý giao hàng";
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    }
+
+    <head>
+        <!-- Custom styles for this page -->
+        <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    </head>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MaDDH)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayDat)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DAI_LY.Ten)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GiaoHang)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MaDDH)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NgayDat)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DAI_LY.Ten)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GiaoHang)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.MaDDH">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaDDH)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayDat)
+                                </td>                               
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DAI_LY.Ten)
+                                </td>
+                                <td>
+                                    @*@(item.GiaoHang ? "Đã giao" : "Chưa giao")*@
+                                    @if (item.GiaoHang == "Đã giao")
+                                    {
+                                        <a href="#" class="doigiaohang" data-id="@item.MaDDH" style="color:green"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></a>
+                                    }
+                                    else if (item.GiaoHang == "Chưa giao")
+                                    {
+                                        <a href="#" class="doigiaohang" data-id="@item.MaDDH" style="color:red"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="doigiaohang" data-id="@item.MaDDH" style="color:#ff9900"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></a>
+
+                                    }
+                                    @*<a href="#" class="doigiaohang" data-id="@item.MaDDH"><b>@Html.DisplayFor(modelItem => item.GiaoHang)</b></a>*@
+                                </td>
+                                <td>
+                                    @Html.ActionLink("In", "Print", new { id = item.MaDDH }, new { @class = "btn btn-info" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @section scripts{
+        <script>
+        var user = {
+            init: function () {
+                user.registerEvents();
+            },
+            registerEvents: function () {
+                $('.doigiaohang').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    var kq = confirm('Bạn có chắc chắn muốn chuyển trạng thái đơn đặt hàng ' + id + ' không?');
+                    if (kq == true) {
+                        $.ajax({
+                            url: "/Admin/DDHCt/ChangeStatus",
+                            data: { id: id },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (response) {
+                                console.log(response);
+                                if (response.status == "Đã giao") {
+                                    btn.text('Đã giao'),
+                                    btn.css({ "color":"green" , "font-weight":"Bold"})
+                                }
+                                else if (response.status == "Chưa giao") {
+                                    btn.text('Chưa giao'),
+                                    btn.css({ "color": "red", "font-weight": "Bold" })                                
+                                } else {
+                                    btn.text('Đang giao'),
+                                    btn.css({ "color": "#ff9900", "font-weight": "Bold" })
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        user.init();
+        </script>
+    }

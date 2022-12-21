@@ -1,0 +1,1113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HTTTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CHI_TIET_DDH">
+          <Key>
+            <PropertyRef Name="MaDDH" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaDDH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="ChietKhau" Type="int" Nullable="false" />
+          <Property Name="TongTien" Type="float" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="MaHH" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHI_TIET_PCK">
+          <Key>
+            <PropertyRef Name="MaPCK" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaPCK" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="MaHH" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="Ghichu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CHI_TIET_PNH">
+          <Key>
+            <PropertyRef Name="MaPNH" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaPNH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="ChietKhau" Type="int" Nullable="false" />
+          <Property Name="TongTien" Type="float" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="MaHH" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONG_NO">
+          <Key>
+            <PropertyRef Name="MaCN" />
+          </Key>
+          <Property Name="MaCN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDL" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DAI_LY">
+          <Key>
+            <PropertyRef Name="MaDL" />
+          </Key>
+          <Property Name="MaDL" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DON_DAT_HANG">
+          <Key>
+            <PropertyRef Name="MaDDH" />
+          </Key>
+          <Property Name="MaDDH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgayDat" Type="datetime" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="GiaoHang" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDL" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HANG_HOA">
+          <Key>
+            <PropertyRef Name="MaHH" />
+          </Key>
+          <Property Name="MaHH" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenHangHoa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DonViTinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DonGia" Type="int" Nullable="false" />
+          <Property Name="MaLoai" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNCC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TonKhoDuKien" Type="int" Nullable="false" />
+          <Property Name="DinhMucTK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHO_HANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="LOAI_HANG_HOA">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHA_CUNG_CAP">
+          <Key>
+            <PropertyRef Name="MaNCC" />
+          </Key>
+          <Property Name="MaNCC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenNCC" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHAN_VIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="QuyenQL" Type="bit" Nullable="false" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PHIEU_CHUYEN_KHO">
+          <Key>
+            <PropertyRef Name="MaPCK" />
+          </Key>
+          <Property Name="MaPCK" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgayChuyen" Type="datetime" Nullable="false" />
+          <Property Name="MaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaKHN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaKHX" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PHIEU_NHAP_HANG">
+          <Key>
+            <PropertyRef Name="MaPNH" />
+          </Key>
+          <Property Name="MaPNH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgayNhap" Type="datetime" Nullable="false" />
+          <Property Name="NhanHang" Type="bit" Nullable="false" />
+          <Property Name="MaNCC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Gui" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ton_kho">
+          <Key>
+            <PropertyRef Name="MaHH" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaHH" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaKH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CHI_TIET_DDH_DON_DAT_HANG">
+          <End Role="DON_DAT_HANG" Type="Self.DON_DAT_HANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CHI_TIET_DDH" Type="Self.CHI_TIET_DDH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DON_DAT_HANG">
+              <PropertyRef Name="MaDDH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_DDH">
+              <PropertyRef Name="MaDDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_DDH_HANG_HOA">
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="1" />
+          <End Role="CHI_TIET_DDH" Type="Self.CHI_TIET_DDH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_DDH">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PCK_HANG_HOA">
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="1" />
+          <End Role="CHI_TIET_PCK" Type="Self.CHI_TIET_PCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PCK">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO">
+          <End Role="PHIEU_CHUYEN_KHO" Type="Self.PHIEU_CHUYEN_KHO" Multiplicity="1" />
+          <End Role="CHI_TIET_PCK" Type="Self.CHI_TIET_PCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaPCK" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PCK">
+              <PropertyRef Name="MaPCK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PNH_HANG_HOA">
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="1" />
+          <End Role="CHI_TIET_PNH" Type="Self.CHI_TIET_PNH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PNH">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PNH_PHIEU_NHAP_HANG">
+          <End Role="PHIEU_NHAP_HANG" Type="Self.PHIEU_NHAP_HANG" Multiplicity="1" />
+          <End Role="CHI_TIET_PNH" Type="Self.CHI_TIET_PNH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaPNH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PNH">
+              <PropertyRef Name="MaPNH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongNo_DAI_LY">
+          <End Role="DAI_LY" Type="Self.DAI_LY" Multiplicity="1" />
+          <End Role="CONG_NO" Type="Self.CONG_NO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAI_LY">
+              <PropertyRef Name="MaDL" />
+            </Principal>
+            <Dependent Role="CONG_NO">
+              <PropertyRef Name="MaDL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DON_DAT_HANG_DAI_LY">
+          <End Role="DAI_LY" Type="Self.DAI_LY" Multiplicity="1" />
+          <End Role="DON_DAT_HANG" Type="Self.DON_DAT_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAI_LY">
+              <PropertyRef Name="MaDL" />
+            </Principal>
+            <Dependent Role="DON_DAT_HANG">
+              <PropertyRef Name="MaDL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DON_DAT_HANG_NHAN_VIEN">
+          <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+          <End Role="DON_DAT_HANG" Type="Self.DON_DAT_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="DON_DAT_HANG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_HOA_LOAI_HANG_HOA">
+          <End Role="LOAI_HANG_HOA" Type="Self.LOAI_HANG_HOA" Multiplicity="1" />
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAI_HANG_HOA">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="HANG_HOA">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_HOA_NHA_CUNG_CAP">
+          <End Role="NHA_CUNG_CAP" Type="Self.NHA_CUNG_CAP" Multiplicity="1" />
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHA_CUNG_CAP">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="HANG_HOA">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG">
+          <End Role="KHO_HANG" Type="Self.KHO_HANG" Multiplicity="1" />
+          <End Role="PHIEU_CHUYEN_KHO" Type="Self.PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaKHN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG1">
+          <End Role="KHO_HANG" Type="Self.KHO_HANG" Multiplicity="1" />
+          <End Role="PHIEU_CHUYEN_KHO" Type="Self.PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaKHX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_NHAN_VIEN">
+          <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+          <End Role="PHIEU_CHUYEN_KHO" Type="Self.PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP">
+          <End Role="NHA_CUNG_CAP" Type="Self.NHA_CUNG_CAP" Multiplicity="1" />
+          <End Role="PHIEU_NHAP_HANG" Type="Self.PHIEU_NHAP_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHA_CUNG_CAP">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_NHAP_HANG_NHAN_VIEN">
+          <End Role="NHAN_VIEN" Type="Self.NHAN_VIEN" Multiplicity="1" />
+          <End Role="PHIEU_NHAP_HANG" Type="Self.PHIEU_NHAP_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ton_kho_HANG_HOA">
+          <End Role="HANG_HOA" Type="Self.HANG_HOA" Multiplicity="1" />
+          <End Role="Ton_kho" Type="Self.Ton_kho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="Ton_kho">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ton_kho_KHO_HANG">
+          <End Role="KHO_HANG" Type="Self.KHO_HANG" Multiplicity="1" />
+          <End Role="Ton_kho" Type="Self.Ton_kho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="Ton_kho">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HTTTModelStoreContainer">
+          <EntitySet Name="CHI_TIET_DDH" EntityType="Self.CHI_TIET_DDH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHI_TIET_PCK" EntityType="Self.CHI_TIET_PCK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHI_TIET_PNH" EntityType="Self.CHI_TIET_PNH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONG_NO" EntityType="Self.CONG_NO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DAI_LY" EntityType="Self.DAI_LY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DON_DAT_HANG" EntityType="Self.DON_DAT_HANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HANG_HOA" EntityType="Self.HANG_HOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHO_HANG" EntityType="Self.KHO_HANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAI_HANG_HOA" EntityType="Self.LOAI_HANG_HOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHA_CUNG_CAP" EntityType="Self.NHA_CUNG_CAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHIEU_CHUYEN_KHO" EntityType="Self.PHIEU_CHUYEN_KHO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHIEU_NHAP_HANG" EntityType="Self.PHIEU_NHAP_HANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ton_kho" EntityType="Self.Ton_kho" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHI_TIET_DDH_DON_DAT_HANG" Association="Self.FK_CHI_TIET_DDH_DON_DAT_HANG">
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+            <End Role="CHI_TIET_DDH" EntitySet="CHI_TIET_DDH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_DDH_HANG_HOA" Association="Self.FK_CHI_TIET_DDH_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_DDH" EntitySet="CHI_TIET_DDH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PCK_HANG_HOA" Association="Self.FK_CHI_TIET_PCK_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_PCK" EntitySet="CHI_TIET_PCK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO" Association="Self.FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO">
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+            <End Role="CHI_TIET_PCK" EntitySet="CHI_TIET_PCK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PNH_HANG_HOA" Association="Self.FK_CHI_TIET_PNH_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_PNH" EntitySet="CHI_TIET_PNH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PNH_PHIEU_NHAP_HANG" Association="Self.FK_CHI_TIET_PNH_PHIEU_NHAP_HANG">
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+            <End Role="CHI_TIET_PNH" EntitySet="CHI_TIET_PNH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongNo_DAI_LY" Association="Self.FK_CongNo_DAI_LY">
+            <End Role="DAI_LY" EntitySet="DAI_LY" />
+            <End Role="CONG_NO" EntitySet="CONG_NO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DON_DAT_HANG_DAI_LY" Association="Self.FK_DON_DAT_HANG_DAI_LY">
+            <End Role="DAI_LY" EntitySet="DAI_LY" />
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DON_DAT_HANG_NHAN_VIEN" Association="Self.FK_DON_DAT_HANG_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_HOA_LOAI_HANG_HOA" Association="Self.FK_HANG_HOA_LOAI_HANG_HOA">
+            <End Role="LOAI_HANG_HOA" EntitySet="LOAI_HANG_HOA" />
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_HOA_NHA_CUNG_CAP" Association="Self.FK_HANG_HOA_NHA_CUNG_CAP">
+            <End Role="NHA_CUNG_CAP" EntitySet="NHA_CUNG_CAP" />
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG" Association="Self.FK_PHIEU_CHUYEN_KHO_KHO_HANG">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG1" Association="Self.FK_PHIEU_CHUYEN_KHO_KHO_HANG1">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_NHAN_VIEN" Association="Self.FK_PHIEU_CHUYEN_KHO_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP" Association="Self.FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP">
+            <End Role="NHA_CUNG_CAP" EntitySet="NHA_CUNG_CAP" />
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_NHAP_HANG_NHAN_VIEN" Association="Self.FK_PHIEU_NHAP_HANG_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ton_kho_HANG_HOA" Association="Self.FK_Ton_kho_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="Ton_kho" EntitySet="Ton_kho" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ton_kho_KHO_HANG" Association="Self.FK_Ton_kho_KHO_HANG">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="Ton_kho" EntitySet="Ton_kho" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HTTTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KHO_HANG">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LOAI_HANG_HOA">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHA_CUNG_CAP">
+          <Key>
+            <PropertyRef Name="MaNCC" />
+          </Key>
+          <Property Name="MaNCC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenNCC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHAN_VIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuyenQL" Type="Boolean" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Ton_kho">
+          <Key>
+            <PropertyRef Name="MaHH" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaHH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KHO_HANG" Relationship="Self.FK_Ton_kho_KHO_HANG" FromRole="Ton_kho" ToRole="KHO_HANG" />
+          <NavigationProperty Name="HANG_HOA" Relationship="HTTTModel.FK_Ton_kho_HANG_HOA" FromRole="Ton_kho" ToRole="HANG_HOA" />
+        </EntityType>
+        <Association Name="FK_Ton_kho_KHO_HANG">
+          <End Role="KHO_HANG" Type="Self.KHO_HANG" Multiplicity="1" />
+          <End Role="Ton_kho" Type="Self.Ton_kho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="Ton_kho">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HTTTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KHO_HANG" EntityType="Self.KHO_HANG" />
+          <EntitySet Name="LOAI_HANG_HOA" EntityType="Self.LOAI_HANG_HOA" />
+          <EntitySet Name="NHA_CUNG_CAP" EntityType="Self.NHA_CUNG_CAP" />
+          <EntitySet Name="NHAN_VIEN" EntityType="Self.NHAN_VIEN" />
+          <EntitySet Name="Ton_kho" EntityType="Self.Ton_kho" />
+          <AssociationSet Name="FK_Ton_kho_KHO_HANG" Association="Self.FK_Ton_kho_KHO_HANG">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="Ton_kho" EntitySet="Ton_kho" />
+          </AssociationSet>
+          <EntitySet Name="DON_DAT_HANG" EntityType="HTTTModel.DON_DAT_HANG" />
+          <AssociationSet Name="FK_DON_DAT_HANG_NHAN_VIEN" Association="HTTTModel.FK_DON_DAT_HANG_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+          </AssociationSet>
+          <EntitySet Name="CHI_TIET_DDH" EntityType="HTTTModel.CHI_TIET_DDH" />
+          <EntitySet Name="CHI_TIET_PNH" EntityType="HTTTModel.CHI_TIET_PNH" />
+          <AssociationSet Name="FK_CHI_TIET_DDH_DON_DAT_HANG" Association="HTTTModel.FK_CHI_TIET_DDH_DON_DAT_HANG">
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+            <End Role="CHI_TIET_DDH" EntitySet="CHI_TIET_DDH" />
+          </AssociationSet>
+          <EntitySet Name="PHIEU_CHUYEN_KHO" EntityType="HTTTModel.PHIEU_CHUYEN_KHO" />
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG" Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG1" Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG1">
+            <End Role="KHO_HANG" EntitySet="KHO_HANG" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_CHUYEN_KHO_NHAN_VIEN" Association="HTTTModel.FK_PHIEU_CHUYEN_KHO_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+          </AssociationSet>
+          <EntitySet Name="CHI_TIET_PCK" EntityType="HTTTModel.CHI_TIET_PCK" />
+          <AssociationSet Name="FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO" Association="HTTTModel.FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO">
+            <End Role="PHIEU_CHUYEN_KHO" EntitySet="PHIEU_CHUYEN_KHO" />
+            <End Role="CHI_TIET_PCK" EntitySet="CHI_TIET_PCK" />
+          </AssociationSet>
+          <EntitySet Name="PHIEU_NHAP_HANG" EntityType="HTTTModel.PHIEU_NHAP_HANG" />
+          <AssociationSet Name="FK_CHI_TIET_PNH_PHIEU_NHAP_HANG" Association="HTTTModel.FK_CHI_TIET_PNH_PHIEU_NHAP_HANG">
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+            <End Role="CHI_TIET_PNH" EntitySet="CHI_TIET_PNH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP" Association="HTTTModel.FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP">
+            <End Role="NHA_CUNG_CAP" EntitySet="NHA_CUNG_CAP" />
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEU_NHAP_HANG_NHAN_VIEN" Association="HTTTModel.FK_PHIEU_NHAP_HANG_NHAN_VIEN">
+            <End Role="NHAN_VIEN" EntitySet="NHAN_VIEN" />
+            <End Role="PHIEU_NHAP_HANG" EntitySet="PHIEU_NHAP_HANG" />
+          </AssociationSet>
+          <EntitySet Name="HANG_HOA" EntityType="HTTTModel.HANG_HOA" />
+          <AssociationSet Name="FK_CHI_TIET_DDH_HANG_HOA" Association="HTTTModel.FK_CHI_TIET_DDH_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_DDH" EntitySet="CHI_TIET_DDH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PCK_HANG_HOA" Association="HTTTModel.FK_CHI_TIET_PCK_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_PCK" EntitySet="CHI_TIET_PCK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHI_TIET_PNH_HANG_HOA" Association="HTTTModel.FK_CHI_TIET_PNH_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="CHI_TIET_PNH" EntitySet="CHI_TIET_PNH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_HOA_LOAI_HANG_HOA" Association="HTTTModel.FK_HANG_HOA_LOAI_HANG_HOA">
+            <End Role="LOAI_HANG_HOA" EntitySet="LOAI_HANG_HOA" />
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANG_HOA_NHA_CUNG_CAP" Association="HTTTModel.FK_HANG_HOA_NHA_CUNG_CAP">
+            <End Role="NHA_CUNG_CAP" EntitySet="NHA_CUNG_CAP" />
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ton_kho_HANG_HOA" Association="HTTTModel.FK_Ton_kho_HANG_HOA">
+            <End Role="HANG_HOA" EntitySet="HANG_HOA" />
+            <End Role="Ton_kho" EntitySet="Ton_kho" />
+          </AssociationSet>
+          <EntitySet Name="CONG_NO" EntityType="HTTTModel.CONG_NO" />
+          <EntitySet Name="DAI_LY" EntityType="HTTTModel.DAI_LY" />
+          <AssociationSet Name="FK_CongNo_DAI_LY" Association="HTTTModel.FK_CongNo_DAI_LY">
+            <End Role="DAI_LY" EntitySet="DAI_LY" />
+            <End Role="CONG_NO" EntitySet="CONG_NO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DON_DAT_HANG_DAI_LY" Association="HTTTModel.FK_DON_DAT_HANG_DAI_LY">
+            <End Role="DAI_LY" EntitySet="DAI_LY" />
+            <End Role="DON_DAT_HANG" EntitySet="DON_DAT_HANG" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DON_DAT_HANG">
+          <Key>
+            <PropertyRef Name="MaDDH" />
+          </Key>
+          <Property Name="MaDDH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDat" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GiaoHang" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MaNV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaDL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NHAN_VIEN" Relationship="HTTTModel.FK_DON_DAT_HANG_NHAN_VIEN" FromRole="DON_DAT_HANG" ToRole="NHAN_VIEN" />
+          <NavigationProperty Name="DAI_LY" Relationship="HTTTModel.FK_DON_DAT_HANG_DAI_LY" FromRole="DON_DAT_HANG" ToRole="DAI_LY" />
+        </EntityType>
+        <Association Name="FK_DON_DAT_HANG_NHAN_VIEN">
+          <End Type="HTTTModel.NHAN_VIEN" Role="NHAN_VIEN" Multiplicity="1" />
+          <End Type="HTTTModel.DON_DAT_HANG" Role="DON_DAT_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="DON_DAT_HANG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CHI_TIET_DDH">
+          <Key>
+            <PropertyRef Name="MaDDH" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaDDH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ChietKhau" Type="Int32" Nullable="false" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaHH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DON_DAT_HANG" Relationship="HTTTModel.FK_CHI_TIET_DDH_DON_DAT_HANG" FromRole="CHI_TIET_DDH" ToRole="DON_DAT_HANG" />
+          <NavigationProperty Name="HANG_HOA" Relationship="HTTTModel.FK_CHI_TIET_DDH_HANG_HOA" FromRole="CHI_TIET_DDH" ToRole="HANG_HOA" />
+        </EntityType>
+        <EntityType Name="CHI_TIET_PNH">
+          <Key>
+            <PropertyRef Name="MaPNH" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaPNH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="ChietKhau" Type="Int32" Nullable="false" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MaHH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PHIEU_NHAP_HANG" Relationship="HTTTModel.FK_CHI_TIET_PNH_PHIEU_NHAP_HANG" FromRole="CHI_TIET_PNH" ToRole="PHIEU_NHAP_HANG" />
+          <NavigationProperty Name="HANG_HOA" Relationship="HTTTModel.FK_CHI_TIET_PNH_HANG_HOA" FromRole="CHI_TIET_PNH" ToRole="HANG_HOA" />
+        </EntityType>
+        <Association Name="FK_CHI_TIET_DDH_DON_DAT_HANG">
+          <End Type="HTTTModel.DON_DAT_HANG" Role="DON_DAT_HANG" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HTTTModel.CHI_TIET_DDH" Role="CHI_TIET_DDH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DON_DAT_HANG">
+              <PropertyRef Name="MaDDH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_DDH">
+              <PropertyRef Name="MaDDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PHIEU_CHUYEN_KHO">
+          <Key>
+            <PropertyRef Name="MaPCK" />
+          </Key>
+          <Property Name="MaPCK" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgayChuyen" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaNV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaKHN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaKHX" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KHO_HANG" Relationship="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG" FromRole="PHIEU_CHUYEN_KHO" ToRole="KHO_HANG" />
+          <NavigationProperty Name="KHO_HANG1" Relationship="HTTTModel.FK_PHIEU_CHUYEN_KHO_KHO_HANG1" FromRole="PHIEU_CHUYEN_KHO" ToRole="KHO_HANG" />
+          <NavigationProperty Name="NHAN_VIEN" Relationship="HTTTModel.FK_PHIEU_CHUYEN_KHO_NHAN_VIEN" FromRole="PHIEU_CHUYEN_KHO" ToRole="NHAN_VIEN" />
+        </EntityType>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG">
+          <End Type="HTTTModel.KHO_HANG" Role="KHO_HANG" Multiplicity="1" />
+          <End Type="HTTTModel.PHIEU_CHUYEN_KHO" Role="PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaKHN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_KHO_HANG1">
+          <End Type="HTTTModel.KHO_HANG" Role="KHO_HANG" Multiplicity="1" />
+          <End Type="HTTTModel.PHIEU_CHUYEN_KHO" Role="PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO_HANG">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaKHX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_CHUYEN_KHO_NHAN_VIEN">
+          <End Type="HTTTModel.NHAN_VIEN" Role="NHAN_VIEN" Multiplicity="1" />
+          <End Type="HTTTModel.PHIEU_CHUYEN_KHO" Role="PHIEU_CHUYEN_KHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CHI_TIET_PCK">
+          <Key>
+            <PropertyRef Name="MaPCK" />
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="MaPCK" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="MaHH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="Ghichu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PHIEU_CHUYEN_KHO" Relationship="HTTTModel.FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO" FromRole="CHI_TIET_PCK" ToRole="PHIEU_CHUYEN_KHO" />
+          <NavigationProperty Name="HANG_HOA" Relationship="HTTTModel.FK_CHI_TIET_PCK_HANG_HOA" FromRole="CHI_TIET_PCK" ToRole="HANG_HOA" />
+        </EntityType>
+        <Association Name="FK_CHI_TIET_PCK_PHIEU_CHUYEN_KHO">
+          <End Type="HTTTModel.PHIEU_CHUYEN_KHO" Role="PHIEU_CHUYEN_KHO" Multiplicity="1" />
+          <End Type="HTTTModel.CHI_TIET_PCK" Role="CHI_TIET_PCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEU_CHUYEN_KHO">
+              <PropertyRef Name="MaPCK" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PCK">
+              <PropertyRef Name="MaPCK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PHIEU_NHAP_HANG">
+          <Key>
+            <PropertyRef Name="MaPNH" />
+          </Key>
+          <Property Name="MaPNH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NgayNhap" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NhanHang" Type="Boolean" Nullable="false" />
+          <Property Name="MaNCC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaNV" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Gui" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NHA_CUNG_CAP" Relationship="HTTTModel.FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP" FromRole="PHIEU_NHAP_HANG" ToRole="NHA_CUNG_CAP" />
+          <NavigationProperty Name="NHAN_VIEN" Relationship="HTTTModel.FK_PHIEU_NHAP_HANG_NHAN_VIEN" FromRole="PHIEU_NHAP_HANG" ToRole="NHAN_VIEN" />
+        </EntityType>
+        <Association Name="FK_CHI_TIET_PNH_PHIEU_NHAP_HANG">
+          <End Type="HTTTModel.PHIEU_NHAP_HANG" Role="PHIEU_NHAP_HANG" Multiplicity="1" />
+          <End Type="HTTTModel.CHI_TIET_PNH" Role="CHI_TIET_PNH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaPNH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PNH">
+              <PropertyRef Name="MaPNH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_NHAP_HANG_NHA_CUNG_CAP">
+          <End Type="HTTTModel.NHA_CUNG_CAP" Role="NHA_CUNG_CAP" Multiplicity="1" />
+          <End Type="HTTTModel.PHIEU_NHAP_HANG" Role="PHIEU_NHAP_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHA_CUNG_CAP">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEU_NHAP_HANG_NHAN_VIEN">
+          <End Type="HTTTModel.NHAN_VIEN" Role="NHAN_VIEN" Multiplicity="1" />
+          <End Type="HTTTModel.PHIEU_NHAP_HANG" Role="PHIEU_NHAP_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAN_VIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="PHIEU_NHAP_HANG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HANG_HOA">
+          <Key>
+            <PropertyRef Name="MaHH" />
+          </Key>
+          <Property Name="MaHH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenHangHoa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DonViTinh" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonGia" Type="Int32" Nullable="false" />
+          <Property Name="MaLoai" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaNCC" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TonKhoDuKien" Type="Int32" Nullable="false" />
+          <Property Name="DinhMucTK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LOAI_HANG_HOA" Relationship="HTTTModel.FK_HANG_HOA_LOAI_HANG_HOA" FromRole="HANG_HOA" ToRole="LOAI_HANG_HOA" />
+          <NavigationProperty Name="NHA_CUNG_CAP" Relationship="HTTTModel.FK_HANG_HOA_NHA_CUNG_CAP" FromRole="HANG_HOA" ToRole="NHA_CUNG_CAP" />
+        </EntityType>
+        <Association Name="FK_CHI_TIET_DDH_HANG_HOA">
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="1" />
+          <End Type="HTTTModel.CHI_TIET_DDH" Role="CHI_TIET_DDH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_DDH">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PCK_HANG_HOA">
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="1" />
+          <End Type="HTTTModel.CHI_TIET_PCK" Role="CHI_TIET_PCK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PCK">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHI_TIET_PNH_HANG_HOA">
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="1" />
+          <End Type="HTTTModel.CHI_TIET_PNH" Role="CHI_TIET_PNH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="CHI_TIET_PNH">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_HOA_LOAI_HANG_HOA">
+          <End Type="HTTTModel.LOAI_HANG_HOA" Role="LOAI_HANG_HOA" Multiplicity="1" />
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAI_HANG_HOA">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="HANG_HOA">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANG_HOA_NHA_CUNG_CAP">
+          <End Type="HTTTModel.NHA_CUNG_CAP" Role="NHA_CUNG_CAP" Multiplicity="1" />
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHA_CUNG_CAP">
+              <PropertyRef Name="MaNCC" />
+            </Principal>
+            <Dependent Role="HANG_HOA">
+              <PropertyRef Name="MaNCC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ton_kho_HANG_HOA">
+          <End Type="HTTTModel.HANG_HOA" Role="HANG_HOA" Multiplicity="1" />
+          <End Type="HTTTModel.Ton_kho" Role="Ton_kho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANG_HOA">
+              <PropertyRef Name="MaHH" />
+            </Principal>
+            <Dependent Role="Ton_kho">
+              <PropertyRef Name="MaHH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CONG_NO">
+          <Key>
+            <PropertyRef Name="MaCN" />
+          </Key>
+          <Property Name="MaCN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaDL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GhiChu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DAI_LY" Relationship="HTTTModel.FK_CongNo_DAI_LY" FromRole="CONG_NO" ToRole="DAI_LY" />
+        </EntityType>
+        <EntityType Name="DAI_LY">
+          <Key>
+            <PropertyRef Name="MaDL" />
+          </Key>
+          <Property Name="MaDL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CongNo_DAI_LY">
+          <End Type="HTTTModel.DAI_LY" Role="DAI_LY" Multiplicity="1" />
+          <End Type="HTTTModel.CONG_NO" Role="CONG_NO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAI_LY">
+              <PropertyRef Name="MaDL" />
+            </Principal>
+            <Dependent Role="CONG_NO">
+              <PropertyRef Name="MaDL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DON_DAT_HANG_DAI_LY">
+          <End Type="HTTTModel.DAI_LY" Role="DAI_LY" Multiplicity="1" />
+          <End Type="HTTTModel.DON_DAT_HANG" Role="DON_DAT_HANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAI_LY">
+              <PropertyRef Name="MaDL" />
+            </Principal>
+            <Dependent Role="DON_DAT_HANG">
+              <PropertyRef Name="MaDL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HTTTModelStoreContainer" CdmEntityContainer="HTTTEntities">
+          <EntitySetMapping Name="KHO_HANG">
+            <EntityTypeMapping TypeName="HTTTModel.KHO_HANG">
+              <MappingFragment StoreEntitySet="KHO_HANG">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAI_HANG_HOA">
+            <EntityTypeMapping TypeName="HTTTModel.LOAI_HANG_HOA">
+              <MappingFragment StoreEntitySet="LOAI_HANG_HOA">
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHA_CUNG_CAP">
+            <EntityTypeMapping TypeName="HTTTModel.NHA_CUNG_CAP">
+              <MappingFragment StoreEntitySet="NHA_CUNG_CAP">
+                <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+                <ScalarProperty Name="TenNCC" ColumnName="TenNCC" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHAN_VIEN">
+            <EntityTypeMapping TypeName="HTTTModel.NHAN_VIEN">
+              <MappingFragment StoreEntitySet="NHAN_VIEN">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="QuyenQL" ColumnName="QuyenQL" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ton_kho">
+            <EntityTypeMapping TypeName="HTTTModel.Ton_kho">
+              <MappingFragment StoreEntitySet="Ton_kho">
+                <ScalarProperty Name="MaHH" ColumnName="MaHH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DON_DAT_HANG">
+            <EntityTypeMapping TypeName="HTTTModel.DON_DAT_HANG">
+              <MappingFragment StoreEntitySet="DON_DAT_HANG">
+                <ScalarProperty Name="MaDL" ColumnName="MaDL" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="GiaoHang" ColumnName="GiaoHang" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="MaDDH" ColumnName="MaDDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHI_TIET_DDH">
+            <EntityTypeMapping TypeName="HTTTModel.CHI_TIET_DDH">
+              <MappingFragment StoreEntitySet="CHI_TIET_DDH">
+                <ScalarProperty Name="MaHH" ColumnName="MaHH" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MaDDH" ColumnName="MaDDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHI_TIET_PNH">
+            <EntityTypeMapping TypeName="HTTTModel.CHI_TIET_PNH">
+              <MappingFragment StoreEntitySet="CHI_TIET_PNH">
+                <ScalarProperty Name="MaHH" ColumnName="MaHH" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MaPNH" ColumnName="MaPNH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHIEU_CHUYEN_KHO">
+            <EntityTypeMapping TypeName="HTTTModel.PHIEU_CHUYEN_KHO">
+              <MappingFragment StoreEntitySet="PHIEU_CHUYEN_KHO">
+                <ScalarProperty Name="MaKHX" ColumnName="MaKHX" />
+                <ScalarProperty Name="MaKHN" ColumnName="MaKHN" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="NgayChuyen" ColumnName="NgayChuyen" />
+                <ScalarProperty Name="MaPCK" ColumnName="MaPCK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHI_TIET_PCK">
+            <EntityTypeMapping TypeName="HTTTModel.CHI_TIET_PCK">
+              <MappingFragment StoreEntitySet="CHI_TIET_PCK">
+                <ScalarProperty Name="Ghichu" ColumnName="Ghichu" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaHH" ColumnName="MaHH" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MaPCK" ColumnName="MaPCK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHIEU_NHAP_HANG">
+            <EntityTypeMapping TypeName="HTTTModel.PHIEU_NHAP_HANG">
+              <MappingFragment StoreEntitySet="PHIEU_NHAP_HANG">
+                <ScalarProperty Name="Gui" ColumnName="Gui" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+                <ScalarProperty Name="NhanHang" ColumnName="NhanHang" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="MaPNH" ColumnName="MaPNH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HANG_HOA">
+            <EntityTypeMapping TypeName="HTTTModel.HANG_HOA">
+              <MappingFragment StoreEntitySet="HANG_HOA">
+                <ScalarProperty Name="DinhMucTK" ColumnName="DinhMucTK" />
+                <ScalarProperty Name="TonKhoDuKien" ColumnName="TonKhoDuKien" />
+                <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="TenHangHoa" ColumnName="TenHangHoa" />
+                <ScalarProperty Name="MaHH" ColumnName="MaHH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONG_NO">
+            <EntityTypeMapping TypeName="HTTTModel.CONG_NO">
+              <MappingFragment StoreEntitySet="CONG_NO">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaDL" ColumnName="MaDL" />
+                <ScalarProperty Name="MaCN" ColumnName="MaCN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DAI_LY">
+            <EntityTypeMapping TypeName="HTTTModel.DAI_LY">
+              <MappingFragment StoreEntitySet="DAI_LY">
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaDL" ColumnName="MaDL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

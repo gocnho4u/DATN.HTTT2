@@ -1,0 +1,148 @@
+﻿@using DATN.HTTT2.Areas.Admin.Models
+
+@model DATN.HTTT2.Areas.Admin.Models.PCKCt
+@{
+    ViewBag.Title = "Lập phiếu chuyển kho";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    HTTTEntities db = new HTTTEntities();
+    List<string> tenhh = (from n in db.HANG_HOA
+                          select n.TenHangHoa).ToList();
+    var ds = from n in db.HANG_HOA
+             select new { n.TenHangHoa, n.DonViTinh};
+}
+
+<head>
+    <style>
+        span.error {
+            font-size: 90%;
+        }
+    </style>
+</head>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Lập phiếu chuyển kho</h4>
+    </div>
+
+    <div class="card-body">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaKHX, "Kho xuất", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaKHX", null, htmlAttributes: new { @class = "form-control", @id = "MaKHX" })
+                @Html.ValidationMessageFor(model => model.MaKHX, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaKHN, "Kho nhận", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaKHN", null, htmlAttributes: new { @class = "form-control", @id = "MaKHN" })
+                @Html.ValidationMessageFor(model => model.MaKHN, "", new { @class = "text-danger" })
+            </div>
+            <span class="error text-danger" id="loikho"></span>
+        </div>
+        
+        <br />
+
+        <h5 class="m-0 font-weight-bold text-primary">Thêm chi tiết chuyển kho</h5>
+        <table class="table table-responsive" id="tblItems" cellpadding="0">
+            <tr>
+                <th>
+                    Tên hàng hóa
+                </th>
+                <th>
+                    Đơn vị tính
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Ghi chú
+                </th>
+            </tr>
+            <tr id="MainRow">
+                <td>
+                    <input type="text" id="hanghoa" class="hanghoa form-control" onchange="capnhapgia()" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="dvtinh" class="dvtinh form-control" disabled="disabled" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="number" min="1" id="soluong" class="soluong form-control" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <input type="text" id="ghichu" class="ghichu form-control" />
+                    <span class="error text-danger"></span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" id="add">Thêm</button>
+                </td>
+            </tr>
+        </table>
+
+        <h5 class="m-0 font-weight-bold text-primary">Chi tiết chuyển kho</h5>
+        <br />
+
+        <table class="table table-bordered" id="bangct">
+            <thead>
+                <tr>
+                    <th>Tên hàng hóa</th>
+                    <th>ĐVT</th>
+                    <th>Số lượng</th>
+                    <th>Ghi chú</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div style="float:right">
+            <span class="text-danger" id="orderMessage"></span>
+            <input type="button" class="btn btn-primary" id="submit" value="Lưu phiếu chuyển kho" />
+            @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Scripts/autocomplete/jquery-1.12.4.js"></script>
+<script src="~/Scripts/autocomplete/jquery-ui.js"></script>
+<script src="~/Scripts/ChuyenKho.js"></script>
+
+<script>
+    $(function () {
+        var availableTags = @Html.Raw(Json.Encode(tenhh));
+        $("#hanghoa").autocomplete({
+            source: availableTags
+        });
+    });
+
+    function capnhapgia() {
+        var ss = @Html.Raw(Json.Encode(ds));
+        var key = document.getElementById("hanghoa").value;
+        var kq = search(key, ss);
+        var kqdvt = ''
+        if (!!kq) {
+            kqdvt = kq.DonViTinh;
+        }
+        document.getElementById("dvtinh").value = kqdvt;
+    }
+
+    //Tìm kiếm thông tin hàng hóa
+    function search(nameKey, myArray) {
+        for (var i = 0; i < myArray.length; i++) {
+            if (myArray[i].TenHangHoa === nameKey) {
+                return myArray[i];
+            }
+        }
+    }
+
+</script>
+

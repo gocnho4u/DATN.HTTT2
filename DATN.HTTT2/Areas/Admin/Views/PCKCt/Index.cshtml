@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.PHIEU_CHUYEN_KHO>
+
+@{
+    ViewBag.Title = "Danh sách phiếu chuyển kho";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Danh sách phiếu chuyển kho</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPCK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayChuyen)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th>
+                            Kho nhận
+                        </th>
+                        <th>
+                            Kho xuất
+                        </th>
+                        <th>@Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MaPCK)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NgayChuyen)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NHAN_VIEN.HoTen)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KHO_HANG.TenKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KHO_HANG1.TenKH)
+                        </th>
+                        <th>
+                            </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.MaPCK">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaPCK)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayChuyen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NHAN_VIEN.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KHO_HANG.TenKH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KHO_HANG1.TenKH)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaPCK }, new { @class = "btn btn-info" }) |
+                            @Ajax.ActionLink("Xóa", "Delete1", new { @id = item.MaPCK }, new AjaxOptions
+                                  {
+                                      Confirm="Bạn có chắc muốn xóa phiếu chuyển kho này không?",
+                                      OnComplete="$('#row_"+item.MaPCK+"').remove()",
+                                      HttpMethod="Delete"
+                                  }, new { @class = "btn btn-danger" })
+
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+</div>
+</div>

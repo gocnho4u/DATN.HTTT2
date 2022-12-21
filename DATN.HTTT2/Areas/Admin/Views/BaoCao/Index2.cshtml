@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewBag.Title = "Báo cáo ngày";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this template-->
+    @*<link href="css/sb-admin-2.min.css" rel="stylesheet">*@
+</head>
+@using (Html.BeginForm("Index2", "BaoCao"))
+{
+    <div class="row">
+
+        <div class="card shadow mb-4" style="width:100%">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary" style="text-align:center">Báo cáo ngày @ViewBag.ThoigianBD đến ngày @ViewBag.ThoigianKT @ViewBag.Loi</h4>
+            </div>
+            <div style="text-align:center">
+                Chọn ngày <input type="text" class="datepicker" name="date1"  autocomplete="off" value="@ViewBag.NgayBD" />
+                đến ngày <input type="text" class="datepicker" name="date2"  autocomplete="off" value="@ViewBag.NgayKT" />
+                <button type="submit" name="submitbutton1" value="submit1" class="btn btn-info">Xem</button>
+                <button type="submit" name="submitbutton2" value="submit2" class="btn btn-success">In</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div style="text-align:center;width: 100%;">
+
+        <div class="col-xl-3 col-md-6 mb-4" style="display:inline-block">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-h">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Số đơn hàng chưa giao</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.SODHCG</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Earnings (Số đơn hàng) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4" style="display:inline-block">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Số đơn hàng đã thực hiện</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.SODH</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (doanh thu) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4" style="display:inline-block">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.DTDH</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4" style="display:inline-block">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Số phiếu nhập đã gửi</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.SOPN</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Số phiếu nhập chưa gửi) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4" style="display:inline-block">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Số phiếu nhập chưa gửi</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.SOPNCG</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Tổng tiền nhập và bán hàng hóa trong ngày</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                    <hr />
+                    <span style="color:red">***Không bao gồm các đơn hàng chưa giao và phiếu nhập chưa gửi</span>
+                </div>
+            </div>
+
+
+            <!-- Area Chart -->
+            @*<div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Biểu đồ tổng tiền mua hàng của khách sỉ và các đại lý</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="myAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>*@
+
+
+        </div>
+        <!-- Donut Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Tổng tiền mua hàng của khách mua sỉ và các đại lý</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie pt-4">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+
+                    <hr />
+                    <span style="color:red">***Bao gồm cả các đơn hàng chưa thực hiện</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            document.getElementsByClassName("datepicker").innerText = $(".datepicker").datepicker({ dateFormat: "mm-dd-yy" }).val()
+        });
+    </script>
+    <!-- Page level plugins -->
+    <script src="~/Du_Lieu/js/demo/chart-area-demo.js"></script>
+    <script src="~/Du_Lieu/js/demo/chart-pie-demo.js"></script>
+    <script src="~/Du_Lieu/js/demo/chart-bar-demo.js"></script>
+
+
+    <script>
+ //BarChart
+        var tenlabel =@Html.Raw(Json.Encode(ViewBag.ten));
+        var giatri =@Html.Raw(Json.Encode(ViewBag.giatri));
+        var ctx = document.getElementById("myBarChart");
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tenlabel,
+                datasets: [{
+                    label: "Tổng tiền",
+                    backgroundColor: "#4e73df",
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    data: giatri,
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: parseFloat(Math.min.apply(Math, giatri) / 2),
+                            max: parseFloat(Math.max.apply(Math, giatri) * 1.5),
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return number_format(value) + ' VND' ;
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 14,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 20,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': ' + number_format(tooltipItem.yLabel)+' VND';
+                        }
+                    }
+                },
+            }
+        });
+
+    </script>
+
+    <script>
+ //Tròn
+        var tenlabel2 =@Html.Raw(Json.Encode(ViewBag.ten2));
+        var giatri2 =@Html.Raw(Json.Encode(ViewBag.giatri2));
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: tenlabel2,
+                datasets: [{
+                    data: giatri2,
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 20,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+
+
+}

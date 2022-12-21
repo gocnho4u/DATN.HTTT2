@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DATN.HTTT2.Areas.Admin.Models.Ton_kho>
+
+@{
+    ViewBag.Title = "Tồn kho";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <!-- Custom styles for this page -->
+    <link href="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h4 class="m-0 font-weight-bold text-primary">Số tượng tồn kho</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HANG_HOA.TenHangHoa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KHO_HANG.TenKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoLuong)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HANG_HOA.TenHangHoa)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.KHO_HANG.TenKH)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SoLuong)
+                        </th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HANG_HOA.TenHangHoa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KHO_HANG.TenKH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoLuong)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+</div>
+</div>

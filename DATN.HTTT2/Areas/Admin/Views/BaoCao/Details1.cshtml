@@ -1,0 +1,66 @@
+﻿
+
+@{
+    ViewBag.Title = "Báo cáo ngày" + ViewBag.Thoigian;
+}
+
+<head>
+    <!-- Custom fonts for this template-->
+    <link href="~/Du_Lieu/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    @*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">*@
+
+    <!-- Custom styles for this template-->
+    <link href="~/Du_Lieu/css/sb-admin-2.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><h1>Báo cáo ngày</h1> 
+                    <p>@ViewBag.Loi</p>
+                    <p>@ViewBag.ThoigianBD đến @ViewBag.ThoigianKT</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>Số đơn hàng chưa giao:</b> @ViewBag.SODHCG</td>
+            </tr>
+            <tr>
+                <td><b>Số đơn hàng đã giao:</b> @ViewBag.SODH </td>
+            </tr>
+            <tr>
+                <td><b>Tổng doanh thu:</b> @ViewBag.DTDH</td>
+            </tr>
+            <tr>
+                <td><b>Tổng phiếu nhập chưa gửi:</b> @ViewBag.SOPNCG</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Du_Lieu/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Du_Lieu/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Du_Lieu/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Du_Lieu/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Du_Lieu/vendor/chart.js/Chart.min.js"></script>
+
+
+
+    <!-- Page level plugins -->
+    <script src="~/Du_Lieu/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Du_Lieu/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
